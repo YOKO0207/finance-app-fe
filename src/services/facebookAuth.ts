@@ -1,9 +1,10 @@
 import {
+	FacebookAuthProvider,
 	getAuth,
 	signInWithCredential,
-	FacebookAuthProvider,
+	signOut,
 } from "firebase/auth";
-import { LoginManager, AccessToken } from "react-native-fbsdk-next";
+import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 import app from "../config/firebaseConfig";
 
 export const facebookLogin = async () => {
@@ -24,8 +25,31 @@ export const facebookLogin = async () => {
 		data.accessToken
 	);
 	signInWithCredential(auth, facebookAuthProvider)
-		.then(() => {})
+		.then((user) => {
+			console.log(user);
+		})
 		.catch((error) => {
 			console.log(error);
 		});
+};
+
+export const facebookLogout = async () => {
+	const auth = getAuth(app);
+
+	// Sign out from Firebase
+	try {
+		await signOut(auth)
+			.then(() => {
+				console.log("User signed out from Firebase");
+			})
+			.catch((error) => {
+				console.error("Firebase sign out error", error);
+			});
+
+		// Log out from Facebook
+		LoginManager.logOut();
+		console.log("User logged out from Facebook");
+	} catch (error) {
+		console.log(error);
+	}
 };
