@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "native-base";
-import { HomeScreen, SettingScreen } from "../../screens";
+import { HomeScreen, SettingScreen } from "@/components/screens";
 
 const Tab = createBottomTabNavigator();
 

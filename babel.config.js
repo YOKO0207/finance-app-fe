@@ -14,6 +14,15 @@ module.exports = function(api) {
 					verbose: false,
 				},
 			],
+			[
+				"module-resolver",
+				{
+					root: ["./"],
+					alias: {
+						"@": "./src",
+					},
+				},
+			],
 			"react-native-reanimated/plugin",
 		],
 	};

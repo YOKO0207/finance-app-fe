@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { Button, FormControl, Text } from "native-base";
 import { View } from "react-native";
-import { facebookLogin } from "../services";
+import { facebookLogin } from "@/services";
 
 export const SettingScreen = () => {
 	return (

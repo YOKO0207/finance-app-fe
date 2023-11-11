@@ -1,12 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
-import { DrawerNavigator } from "./src/components/organisms";
+import { DrawerNavigator } from "@/components/organisms";
 import {
 	NoteNewScreen,
 	TransactionIndexScreen,
 	TransactionNewScreen
-} from "./src/screens";
+} from "@/components/screens";
+
 
 const Stack = createNativeStackNavigator();
 

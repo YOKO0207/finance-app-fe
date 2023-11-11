@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import { Button, FormControl, Text } from "native-base";
 import { View } from "react-native";
-import { useUser } from "../hooks";
-import { facebookLogout } from "../services";
+import { useUser } from "@/hooks";
+import { facebookLogout } from "@/services";
 
 export const HomeScreen = ({navigation}: any) => {
 	const { user } = useUser();

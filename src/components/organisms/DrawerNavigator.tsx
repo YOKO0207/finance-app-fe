@@ -1,5 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { NoteIndexScreen, SettingScreen } from "../../screens";
+import { NoteIndexScreen, SettingScreen } from "@/components/screens";
 
 const Drawer = createDrawerNavigator();
 

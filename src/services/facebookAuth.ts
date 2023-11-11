@@ -5,7 +5,7 @@ import {
 	signOut,
 } from "firebase/auth";
 import { AccessToken, LoginManager } from "react-native-fbsdk-next";
-import app from "../config/firebaseConfig";
+import app from "@/config/firebaseConfig";
 
 const auth = getAuth(app);
 
