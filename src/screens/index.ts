@@ -1,4 +1,4 @@
-export * from "./LoginScreen";
+export * from "./SettingScreen";
 export * from "./HomeScreen";
 export * from "./NoteIndexScreen";
 export * from "./NoteNewScreen";

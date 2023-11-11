@@ -3,7 +3,7 @@ import { Button, FormControl, Text } from "native-base";
 import { View } from "react-native";
 import { facebookLogin } from "../services";
 
-export const LoginScreen = () => {
+export const SettingScreen = () => {
 	return (
 		<View>
 			<FormControl width="100%" alignItems={"center"}>

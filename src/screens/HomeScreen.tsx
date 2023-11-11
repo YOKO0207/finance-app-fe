@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { useUser } from "../hooks";
 import { facebookLogout } from "../services";
 
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}: any) => {
 	const { user } = useUser();
 	
 	return (
@@ -21,6 +21,9 @@ export const HomeScreen = () => {
 					</Button>
 				)}
 			</FormControl>
+			<Button onPress={() => navigation.navigate("noteIndex")}>
+				go to index
+			</Button>
 			<StatusBar style="auto" />
 		</View>
 	);

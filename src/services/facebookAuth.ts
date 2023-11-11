@@ -7,10 +7,11 @@ import {
 import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 import app from "../config/firebaseConfig";
 
+const auth = getAuth(app);
+
 export const facebookLogin = async () => {
 	const result = await LoginManager.logInWithPermissions([
-		"public_profile",
-		"email",
+		"public_profile"
 	]);
 	if (result.isCancelled) {
 		throw "User cancelled the login process";
@@ -20,7 +21,7 @@ export const facebookLogin = async () => {
 		throw "Something went wrong obtaining access token";
 	}
 
-	const auth = getAuth(app);
+	
 	const facebookAuthProvider = FacebookAuthProvider.credential(
 		data.accessToken
 	);
