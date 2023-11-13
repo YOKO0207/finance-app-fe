@@ -7,11 +7,31 @@ import {
 	TransactionIndexScreen,
 	TransactionNewScreen
 } from "@/components/screens";
-
+import FlashMessage from "react-native-flash-message";
+import React, { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import app from "@/config/firebaseConfig";
+import { setAuthToken } from "@/adapters"
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+	useEffect(() => {
+		const auth = getAuth(app);
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				user.getIdToken().then((idToken) => {
+					setAuthToken(idToken);
+				});
+			} else {
+				setAuthToken(null);
+			}
+		});
+
+		return () => unsubscribe(); // Cleanup subscription on unmount
+	}, []);
 
 	return (
 		<NativeBaseProvider>
@@ -39,6 +59,7 @@ export default function App() {
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
+			<FlashMessage position="bottom" />
 		</NativeBaseProvider>
 	);
 }
