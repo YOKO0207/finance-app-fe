@@ -14,3 +14,8 @@ export type NoteCreateInput = {
 	note_title: string;
 	person_name: string;
 };
+
+export type NoteUpdateInput = {
+	note_title: string;
+	person_name: string;
+};

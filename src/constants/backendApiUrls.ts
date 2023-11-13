@@ -1,10 +1,10 @@
 export const BACKEND_API_URLS = {
 	NOTES: {
 		NOTES: "notes",
-		NOTE: "note/:noteId",
+		NOTE: "notes/[noteId]",
 	},
 	TRANSACTIONS: {
-		TRANSACTIONS: "notes/:noteId/transactions",
-		TRANSACTION: "notes/:noteId/transaction/:transactionId",
+		TRANSACTIONS: "notes/[noteId]/transactions",
+		TRANSACTION: "notes/[noteId]/transaction/[transactionId]",
 	},
 };

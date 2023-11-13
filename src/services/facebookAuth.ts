@@ -27,7 +27,8 @@ export const facebookLogin = async () => {
 	);
 	signInWithCredential(auth, facebookAuthProvider)
 		.then((user) => {
-			console.log(user);
+			console.log("Login success")
+			//console.log(user);
 		})
 		.catch((error) => {
 			console.log(error);

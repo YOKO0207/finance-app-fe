@@ -5,7 +5,8 @@ import { DrawerNavigator } from "@/components/organisms";
 import {
 	NoteNewScreen,
 	TransactionIndexScreen,
-	TransactionNewScreen
+	TransactionNewScreen,
+	NoteEditScreen,
 } from "@/components/screens";
 import FlashMessage from "react-native-flash-message";
 import React, { useEffect } from "react";
@@ -46,6 +47,11 @@ export default function App() {
 						name="NoteNewScreen"
 						component={NoteNewScreen}
 						options={{ title: "ノート新規作成" }}
+					/>
+					<Stack.Screen
+						name="NoteEditScreen"
+						component={NoteEditScreen}
+						options={{ title: "ノート編集" }}
 					/>
 					<Stack.Screen
 						name="TransactionIndexScreen"

@@ -9,6 +9,7 @@ class FetcherService {
 			const response = await axiosClient.get(url);
 			return response;
 		} catch (error: any) {
+			console.log(error);
 			throw error.response;
 		}
 	}
@@ -17,6 +18,7 @@ class FetcherService {
 			const response = await axiosClient.get(url);
 			return response;
 		} catch (error: any) {
+			console.log(error);
 			throw error.response;
 		}
 	}
@@ -29,6 +31,7 @@ class FetcherService {
 			return response;
 		} 
 		catch (error: any) {
+			console.log(error);
 			throw error.response;
 		}
 	}
@@ -40,6 +43,7 @@ class FetcherService {
 			const response = await axiosClient.post(apiUrl, input);
 			return response;
 		} catch (error: any) {
+			console.log(error);
 			throw error.response;
 		}
 	}
@@ -51,6 +55,7 @@ class FetcherService {
 			const response = await axiosClient.patch(apiUrl, input);
 			return response;
 		} catch (error: any) {
+			console.log(error);
 			throw error.response;
 		}
 	}
@@ -59,6 +64,7 @@ class FetcherService {
 			const response = await axiosClient.delete(apiUrl);
 			return response;
 		} catch (error: any) {
+			console.log(error);
 			throw error.response;
 		}
 	}

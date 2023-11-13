@@ -17,7 +17,7 @@ export const useUser = () => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				user.getIdToken().then((idToken) => {
-					console.log(idToken);
+					//console.log(idToken);
 					//console.log(idToken);
 				});
 				setUser({

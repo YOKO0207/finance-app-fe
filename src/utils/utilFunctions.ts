@@ -28,7 +28,18 @@ export const generateUrl = (
 			return String(paramValue || "");
 		}
 	});
+
+	// this does not work with the url like notes/:noteId. TODO examine why
+	// return url.replace(/:(\w+)/g, (_, key: string) => {
+  //       const paramValue = params[key];
+  //       if (Array.isArray(paramValue)) {
+	// 				return String(paramValue[0] || "");
+	// 			} else {
+	// 				return String(paramValue || "");
+	// 			}
+  //   });
 };
+
 
 export const SWRFetcher = async <T>(url: string) => {
 	return await fetcherService.SWRGet<T>(url);
