@@ -1,6 +1,6 @@
 export interface Transactions {
 	id: string;
-	amount: string;
+	amount: number;
 	currency_type: number;
 	transaction_type: number;
 	transaction_desctiption: string;
@@ -8,21 +8,21 @@ export interface Transactions {
 
 export interface Transaction {
 	id: string;
-	amount: string;
+	amount: number;
 	currency_type: number;
 	transaction_type: number;
 	transaction_desctiption: string;
 }
 
 export type TransactionCreateInput = {
-	amount: string;
+	amount: number;
 	currency_type: number;
 	transaction_type: number;
 	transaction_desctiption: string;
 }
 
 export type TransactionUpdateInput = {
-	amount: string;
+	amount: number;
 	currency_type: number;
 	transaction_type: number;
 	transaction_desctiption: string;

@@ -1,5 +1,5 @@
-import { useTransactionCreateHandler } from "@/hooks";
-import { TransactionCreateInput } from "@/types";
+import { useTransactionCreateHandler, useTransactionDetailSWR, useTransactionUpdateHandler } from "@/hooks";
+import { TransactionCreateInput, TransactionUpdateInput } from "@/types";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
@@ -9,35 +9,28 @@ interface Props {
 	route: any;
 }
 
-export const TransactionNewScreen = ({ route }: Props) => {
-	const { noteId } = route.params;
-	const { handleTransactionCreate } = useTransactionCreateHandler();
+export const TransactionEditScreen = ({ route }: Props) => {
+	const { noteId, transactionId } = route.params;
+	const { handleTransactionUpdate } = useTransactionUpdateHandler();
+
+	const { data: transaction } = useTransactionDetailSWR({ noteId, transactionId });
 
 	const validationSchema = Yup.object().shape({
-		amount: Yup.number().required("amountは必須です"),
-		currency_type: Yup.number().required("currency_typeは必須です"),
-		transaction_type: Yup.number().required("transaction_typeは必須です"),
+		amount: Yup.number().required("タイトルは必須です"),
+		currency_type: Yup.number().required("タイトルは必須です"),
+		transaction_type: Yup.number().required("タイトルは必須です"),
 		transaction_desctiption: Yup.string(),
 	});
 
 	const initialValues = {
-		amount: 0,
-		currency_type: 1,
-		transaction_type: 1,
-		transaction_desctiption: "",
+		amount: transaction?.data?.data?.amount || 0,
+		currency_type: transaction?.data?.data?.currency_type || 1,
+		transaction_type: transaction?.data?.data?.transaction_type || 1,
+		transaction_desctiption: transaction?.data?.data?.transaction_desctiption || "",
 	};
 
-	const handleFormSubmit = (input: TransactionCreateInput) => {
-		const convertedInput = input = {
-			amount: Number(input.amount),
-			currency_type: Number(input.currency_type),
-			transaction_type: Number(input.transaction_type),
-			transaction_desctiption: input.transaction_desctiption,
-		}
-		const validationErrors = handleTransactionCreate({
-			input: convertedInput,
-			noteId,
-		});
+	const handleFormSubmit = (input: TransactionUpdateInput) => {
+		const validationErrors = handleTransactionUpdate({ input, noteId, transactionId });
 		return validationErrors;
 	};
 
@@ -103,7 +96,7 @@ export const TransactionNewScreen = ({ route }: Props) => {
 								style={styles.input}
 								onChangeText={handleChange("transaction_desctiption")}
 								onBlur={handleBlur("transaction_desctiption")}
-								value={values.transaction_desctiption}
+								value={values.transaction_desctiption.toString()}
 							/>
 							{touched.transaction_desctiption &&
 								errors.transaction_desctiption && (

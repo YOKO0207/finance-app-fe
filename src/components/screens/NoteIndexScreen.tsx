@@ -9,8 +9,8 @@ import { Notes } from "@/types";
 type RootStackParamList = {
 	NoteIndexScreen: undefined;
 	NoteNewScreen: undefined;
-	TransactionIndexScreen: undefined;
-	NoteEditScreen: { noteId: string};
+	TransactionIndexScreen: { noteId: string };
+	NoteEditScreen: { noteId: string };
 };
 type NoteIndexScreenProps = StackNavigationProp<
 	RootStackParamList,
@@ -43,9 +43,9 @@ export const NoteIndexScreen = (props: Props) => {
 						編集
 					</Text>
 					<Button onPress={() => handleNoteDelete({noteId: item.id})}>削除</Button>
-					{/* <Text onPress={() => navigation.navigate("TransactionIndexScreen")}>
+					<Text onPress={() => navigation.navigate("TransactionIndexScreen", { noteId: item.id })}>
 						取引一覧
-					</Text> */}
+					</Text>
 				</>
 			))}
 			

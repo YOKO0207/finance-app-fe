@@ -6,6 +6,7 @@ import {
 	NoteNewScreen,
 	TransactionIndexScreen,
 	TransactionNewScreen,
+	TransactionEditScreen,
 	NoteEditScreen,
 } from "@/components/screens";
 import FlashMessage from "react-native-flash-message";
@@ -62,6 +63,11 @@ export default function App() {
 						name="TransactionNewScreen"
 						component={TransactionNewScreen}
 						options={{ title: "取引登録" }}
+					/>
+					<Stack.Screen
+						name="TransactionEditScreen"
+						component={TransactionEditScreen}
+						options={{ title: "取引編集" }}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>

@@ -8,6 +8,7 @@ import * as Yup from "yup";
 interface Props {
 	route: any;
 }
+
 export const NoteEditScreen = ({ route }: Props) => {
 	const { noteId } = route.params;
 	const { data: note } = useNoteDetailSWR({ noteId });
