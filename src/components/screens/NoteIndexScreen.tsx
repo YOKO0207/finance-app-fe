@@ -5,6 +5,7 @@ import { Button, Text } from "native-base";
 import { showMessage } from "react-native-flash-message";
 import { useNoteIndexSWR, useNoteDeleteHandler } from "@/hooks";
 import { Notes } from "@/types";
+import { CURRENCIES } from "@/constants";
 
 type RootStackParamList = {
 	NoteIndexScreen: undefined;
@@ -39,16 +40,26 @@ export const NoteIndexScreen = (props: Props) => {
 			{notes?.data?.data?.map((item: Notes) => (
 				<>
 					<Text key={item.id}>{item.note_title}</Text>
-					<Text onPress={() => navigation.navigate("NoteEditScreen", { noteId: item.id})}>
+					<Text key={item.id}>{`${CURRENCIES[item.currency_type]}${item.total}`}</Text>
+					<Text
+						onPress={() =>
+							navigation.navigate("NoteEditScreen", { noteId: item.id })
+						}
+					>
 						編集
 					</Text>
-					<Button onPress={() => handleNoteDelete({noteId: item.id})}>削除</Button>
-					<Text onPress={() => navigation.navigate("TransactionIndexScreen", { noteId: item.id })}>
+					<Button onPress={() => handleNoteDelete({ noteId: item.id })}>
+						削除
+					</Button>
+					<Text
+						onPress={() =>
+							navigation.navigate("TransactionIndexScreen", { noteId: item.id })
+						}
+					>
 						取引一覧
 					</Text>
 				</>
 			))}
-			
 		</View>
 	);
 };

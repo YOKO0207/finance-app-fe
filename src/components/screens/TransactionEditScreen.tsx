@@ -1,5 +1,7 @@
-import { useTransactionCreateHandler, useTransactionDetailSWR, useTransactionUpdateHandler } from "@/hooks";
-import { TransactionCreateInput, TransactionUpdateInput } from "@/types";
+import { CURRENCIES } from "@/constants";
+import { useTransactionDetailSWR, useTransactionUpdateHandler } from "@/hooks";
+import { TransactionUpdateInput } from "@/types";
+import { Picker } from "@react-native-picker/picker";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
@@ -13,24 +15,32 @@ export const TransactionEditScreen = ({ route }: Props) => {
 	const { noteId, transactionId } = route.params;
 	const { handleTransactionUpdate } = useTransactionUpdateHandler();
 
-	const { data: transaction } = useTransactionDetailSWR({ noteId, transactionId });
+	const { data: transaction } = useTransactionDetailSWR({
+		noteId,
+		transactionId,
+	});
 
 	const validationSchema = Yup.object().shape({
 		amount: Yup.number().required("タイトルは必須です"),
-		currency_type: Yup.number().required("タイトルは必須です"),
+		currency_type: Yup.string().required("通貨を選択してください"),
 		transaction_type: Yup.number().required("タイトルは必須です"),
 		transaction_desctiption: Yup.string(),
 	});
 
 	const initialValues = {
 		amount: transaction?.data?.data?.amount || 0,
-		currency_type: transaction?.data?.data?.currency_type || 1,
+		currency_type: transaction?.data?.data?.currency_type || "",
 		transaction_type: transaction?.data?.data?.transaction_type || 1,
-		transaction_desctiption: transaction?.data?.data?.transaction_desctiption || "",
+		transaction_desctiption:
+			transaction?.data?.data?.transaction_desctiption || "",
 	};
 
 	const handleFormSubmit = (input: TransactionUpdateInput) => {
-		const validationErrors = handleTransactionUpdate({ input, noteId, transactionId });
+		const validationErrors = handleTransactionUpdate({
+			input,
+			noteId,
+			transactionId,
+		});
 		return validationErrors;
 	};
 
@@ -46,6 +56,7 @@ export const TransactionEditScreen = ({ route }: Props) => {
 					handleChange,
 					handleBlur,
 					handleSubmit,
+					setFieldValue,
 					values,
 					errors,
 					touched,
@@ -104,6 +115,24 @@ export const TransactionEditScreen = ({ route }: Props) => {
 										{errors.transaction_desctiption}
 									</Text>
 								)}
+						</View>
+
+						<View style={styles.inputContainer}>
+							<Text>Select a Currency:</Text>
+							<Picker
+								selectedValue={values.currency_type}
+								onValueChange={(itemValue) =>
+									setFieldValue("currency_type", itemValue)
+								}
+							>
+								{Object.entries(CURRENCIES).map(([code, symbol]) => (
+									<Picker.Item
+										key={code}
+										label={`${code} (${symbol})`}
+										value={code}
+									/>
+								))}
+							</Picker>
 						</View>
 
 						<Button onPress={() => handleSubmit()} title="Submit" />

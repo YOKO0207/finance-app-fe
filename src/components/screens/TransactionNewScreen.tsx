@@ -3,6 +3,8 @@ import { TransactionCreateInput } from "@/types";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import { CURRENCIES } from "@/constants";
 import * as Yup from "yup";
 
 interface Props {
@@ -15,14 +17,14 @@ export const TransactionNewScreen = ({ route }: Props) => {
 
 	const validationSchema = Yup.object().shape({
 		amount: Yup.number().required("amountは必須です"),
-		currency_type: Yup.number().required("currency_typeは必須です"),
+		currency_type: Yup.string().required("通貨を選択してください"),
 		transaction_type: Yup.number().required("transaction_typeは必須です"),
 		transaction_desctiption: Yup.string(),
 	});
 
 	const initialValues = {
 		amount: 0,
-		currency_type: 1,
+		currency_type: "",
 		transaction_type: 1,
 		transaction_desctiption: "",
 	};
@@ -30,7 +32,7 @@ export const TransactionNewScreen = ({ route }: Props) => {
 	const handleFormSubmit = (input: TransactionCreateInput) => {
 		const convertedInput = input = {
 			amount: Number(input.amount),
-			currency_type: Number(input.currency_type),
+			currency_type: input.currency_type,
 			transaction_type: Number(input.transaction_type),
 			transaction_desctiption: input.transaction_desctiption,
 		}
@@ -53,6 +55,7 @@ export const TransactionNewScreen = ({ route }: Props) => {
 					handleChange,
 					handleBlur,
 					handleSubmit,
+					setFieldValue,
 					values,
 					errors,
 					touched,
@@ -68,19 +71,6 @@ export const TransactionNewScreen = ({ route }: Props) => {
 							/>
 							{touched.amount && errors.amount && (
 								<Text style={styles.error}>{errors.amount}</Text>
-							)}
-						</View>
-
-						<View style={styles.inputContainer}>
-							<Text>Currency Type</Text>
-							<TextInput
-								style={styles.input}
-								onChangeText={handleChange("currency_type")}
-								onBlur={handleBlur("currency_type")}
-								value={values.currency_type.toString()}
-							/>
-							{touched.currency_type && errors.currency_type && (
-								<Text style={styles.error}>{errors.currency_type}</Text>
 							)}
 						</View>
 
@@ -111,6 +101,24 @@ export const TransactionNewScreen = ({ route }: Props) => {
 										{errors.transaction_desctiption}
 									</Text>
 								)}
+						</View>
+
+						<View style={styles.inputContainer}>
+							<Text>Select a Currency:</Text>
+							<Picker
+								selectedValue={values.currency_type}
+								onValueChange={(itemValue) =>
+									setFieldValue("currency_type", itemValue)
+								}
+							>
+								{Object.entries(CURRENCIES).map(([code, symbol]) => (
+									<Picker.Item
+										key={code}
+										label={`${code} (${symbol})`}
+										value={code}
+									/>
+								))}
+							</Picker>
 						</View>
 
 						<Button onPress={() => handleSubmit()} title="Submit" />
