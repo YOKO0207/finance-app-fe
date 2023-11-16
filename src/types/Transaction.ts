@@ -4,6 +4,7 @@ export interface Transactions {
 	currency_type: string;
 	transaction_type: number;
 	transaction_desctiption: string;
+	created_at: string;
 }
 
 export interface Transaction {

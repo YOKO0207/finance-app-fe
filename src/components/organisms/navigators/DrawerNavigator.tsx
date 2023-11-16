@@ -1,11 +1,21 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NoteIndexScreen, SettingScreen } from "@/components/screens";
+import { colors } from "@/styles";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import React from "react";
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
 	return (
-		<Drawer.Navigator>
+		<Drawer.Navigator
+			screenOptions={{
+				headerStyle: { backgroundColor: colors.primary[500] },
+				headerTintColor: "#fff",
+				headerTitleStyle: {
+					fontWeight: "bold",
+				},
+			}}
+		>
 			<Drawer.Screen
 				name="NoteIndexScreen"
 				component={NoteIndexScreen}

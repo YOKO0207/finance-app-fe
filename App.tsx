@@ -1,25 +1,26 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NativeBaseProvider } from "native-base";
+import { setAuthToken } from "@/adapters";
 import { DrawerNavigator } from "@/components/organisms";
 import {
+	NoteEditScreen,
 	NoteNewScreen,
+	TransactionEditScreen,
 	TransactionIndexScreen,
 	TransactionNewScreen,
-	TransactionEditScreen,
-	NoteEditScreen,
 } from "@/components/screens";
-import FlashMessage from "react-native-flash-message";
-import React, { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { getAuth } from "firebase/auth";
 import app from "@/config/firebaseConfig";
-import { setAuthToken } from "@/adapters"
+import { colors } from "@/styles";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { NativeBaseProvider } from "native-base";
+import React, { useEffect } from "react";
+import FlashMessage from "react-native-flash-message";
+import { SheetProvider } from "react-native-actions-sheet";
+//import "./src/components/organisms/actionSheets/sheets";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
 	useEffect(() => {
 		const auth = getAuth(app);
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,17 +38,31 @@ export default function App() {
 
 	return (
 		<NativeBaseProvider>
+			<SheetProvider>
 			<NavigationContainer>
-				<Stack.Navigator>
+				<Stack.Navigator
+					screenOptions={{
+						headerStyle: { backgroundColor: colors.primary[500] },
+						headerTintColor: "#fff",
+						headerTitleStyle: {
+							fontWeight: "bold",
+						},
+					}}
+				>
 					<Stack.Screen
 						name="Drawer"
 						component={DrawerNavigator}
-						options={{ headerShown: false }}
+						options={{
+							headerShown: false,
+							headerStyle: {
+								backgroundColor: "blue",
+							},
+						}}
 					/>
 					<Stack.Screen
 						name="NoteNewScreen"
 						component={NoteNewScreen}
-						options={{ title: "ノート新規作成" }}
+						options={{ title: "トラベル登録" }}
 					/>
 					<Stack.Screen
 						name="NoteEditScreen"
@@ -71,7 +86,9 @@ export default function App() {
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
+
 			<FlashMessage position="bottom" />
+			</SheetProvider>
 		</NativeBaseProvider>
 	);
 }
