@@ -1,9 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import { View, Text } from "react-native";
+import { AppLayoutA } from "@/components/layouts";
+import { NoteCard, TransactionCard } from "@/components/organisms";
+import {
+	useNoteDetailSWR,
+	useTransactionDeleteHandler,
+	useTransactionIndexSWR,
+} from "@/hooks";
+import { Transactions } from "@/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Button } from "native-base";
-import { Notes, Transactions } from "@/types";
-import { useTransactionDeleteHandler, useTransactionIndexSWR } from "@/hooks";
+import { StyleSheet, View } from "react-native";
 
 type RootStackParamList = {
 	TransactionIndexScreen: undefined;
@@ -22,46 +26,51 @@ export const TransactionIndexScreen = (props: Props) => {
 	const { navigation, route } = props;
 	const { noteId } = route.params;
 
-	const { data: transactions } = useTransactionIndexSWR({noteId})
+	const { data: transactions } = useTransactionIndexSWR({ noteId });
+	const { data: note } = useNoteDetailSWR({ noteId });
 
 	const { handleTransactionDelete } = useTransactionDeleteHandler();
 
-	console.log("inside transaction index", transactions)
+	console.log("inside transaction index", transactions);
 
 	return (
-		<View>
-			<StatusBar style="auto" />
-			{transactions?.data?.data?.map((item: Transactions) => (
-				<>
-					<Text>{item.id}</Text>
-					<Button
-						onPress={() =>
-							navigation.navigate("TransactionEditScreen", {
-								noteId,
-								transactionId: item.id,
-							})
-						}
-					>
-						edit
-					</Button>
-					<Button
-						onPress={() =>
-							handleTransactionDelete({ noteId, transactionId: item.id })
-						}
-					>
-						delete
-					</Button>
-				</>
-			))}
-			<Button
-				onPress={() =>
-					navigation.navigate("TransactionNewScreen", {
-						noteId,
-					})
-				}
-			>
-				go to transaction new
-			</Button>
-		</View>
+		<AppLayoutA
+			navigateToNewScreen={() =>
+				navigation.navigate("TransactionNewScreen", {
+					noteId,
+				})
+			}
+		>
+			<View style={styles.noteWrapper}>
+				<NoteCard note={note?.data?.data} />
+			</View>
+			<View style={styles.container}>
+				{transactions?.data?.data?.map((item: Transactions) => (
+					<View key={item.id}>
+						<TransactionCard
+							transaction={item}
+							onDeletePress={() =>
+								handleTransactionDelete({ noteId, transactionId: item.id })
+							}
+							onEditPress={() =>
+								navigation.navigate("TransactionEditScreen", {
+									noteId,
+									transactionId: item.id,
+								})
+							}
+						/>
+					</View>
+				))}
+			</View>
+		</AppLayoutA>
 	);
 };
+
+const styles = StyleSheet.create({
+	noteWrapper: {
+		marginBottom: 24,
+	},
+	container: {
+		borderRadius: 8,
+	},
+});

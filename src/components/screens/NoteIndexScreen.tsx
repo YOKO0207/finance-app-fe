@@ -1,11 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import { View, Alert } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { Button, Text } from "native-base";
-import { showMessage } from "react-native-flash-message";
-import { useNoteIndexSWR, useNoteDeleteHandler } from "@/hooks";
+import { AppLayoutA } from "@/components/layouts";
+import { NoteCard } from "@/components/organisms";
+import { useNoteDeleteHandler, useNoteIndexSWR } from "@/hooks";
 import { Notes } from "@/types";
-import { CURRENCIES } from "@/constants";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 type RootStackParamList = {
 	NoteIndexScreen: undefined;
@@ -27,39 +25,35 @@ export const NoteIndexScreen = (props: Props) => {
 
 	const { handleNoteDelete } = useNoteDeleteHandler();
 
-	// const showErrorAlert = (errorMessage: string) => {
-	// 	Alert.alert("Error", errorMessage, [{ text: "OK" }], { cancelable: false });
-	// };
-	
 	return (
-		<View>
-			<StatusBar style="auto" />
-			<Button onPress={() => navigation.navigate("NoteNewScreen")}>
-				go to note new
-			</Button>
-			{notes?.data?.data?.map((item: Notes) => (
-				<>
-					<Text key={item.id}>{item.note_title}</Text>
-					<Text key={item.id}>{`${CURRENCIES[item.currency_type]}${item.total}`}</Text>
-					<Text
-						onPress={() =>
-							navigation.navigate("NoteEditScreen", { noteId: item.id })
-						}
-					>
-						編集
-					</Text>
-					<Button onPress={() => handleNoteDelete({ noteId: item.id })}>
-						削除
-					</Button>
-					<Text
+		<AppLayoutA
+			navigateToNewScreen={() => navigation.navigate("NoteNewScreen")}
+		>
+			<View style={styles.container}>
+				{notes?.data?.data?.map((item: Notes) => (
+					<TouchableOpacity
 						onPress={() =>
 							navigation.navigate("TransactionIndexScreen", { noteId: item.id })
 						}
+						activeOpacity={1}
 					>
-						取引一覧
-					</Text>
-				</>
-			))}
-		</View>
+						<NoteCard
+							key={item.id}
+							note={item}
+							onEditPress={() =>
+								navigation.navigate("NoteEditScreen", { noteId: item.id })
+							}
+							onDeletePress={() => handleNoteDelete({ noteId: item.id })}
+						/>
+					</TouchableOpacity>
+				))}
+			</View>
+		</AppLayoutA>
 	);
 };
+
+const styles = StyleSheet.create({
+	container: {
+		gap:20
+	},
+});
