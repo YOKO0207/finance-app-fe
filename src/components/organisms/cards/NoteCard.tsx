@@ -55,7 +55,7 @@ export const NoteCard = (props: Props) => {
 				<Box style={styles.contentWrapper}>
 					<Text style={styles.totalText}>{`${
 						note?.currency_type && CURRENCIES[note?.currency_type] || ""
-					}${note?.total}`}</Text>
+					}${note?.total || "0"}`}</Text>
 					<Box style={styles.userWrapper}>
 						<Box style={styles.userIcon}>
 							<Icon name="user" size={18} color="white" />
