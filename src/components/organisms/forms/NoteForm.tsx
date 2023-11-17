@@ -50,6 +50,9 @@ export const NoteForm = (props: Props) => {
 							"分かりやすいように旅の名前をつけましょう",
 							"例）ベトナム女子旅",
 						]}
+						error={
+							touched.note_title && errors.note_title ? errors.note_title : ""
+						}
 					/>
 
 					<TextField
@@ -58,6 +61,11 @@ export const NoteForm = (props: Props) => {
 						value={values.person_name}
 						label="割り勘をする相手"
 						note={["誰と割り勘をしますか？"]}
+						error={
+							touched.person_name && errors.person_name
+								? errors.person_name
+								: ""
+						}
 					/>
 					<Select
 						label="最終的に清算をする通貨"

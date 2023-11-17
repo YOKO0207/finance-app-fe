@@ -51,9 +51,10 @@ export const TransactionForm = (props: Props) => {
 					<TextField
 						onChangeText={handleChange("amount")}
 						onBlur={handleBlur("amount")}
-						value={values.amount.toString()}
+						value={values.amount ? values.amount.toString() : ""}
 						label="金額"
 						note={["支払いをした金額を入力してください。"]}
+						error={touched.amount && errors.amount ? errors.amount : ""}
 					/>
 
 					<View>
@@ -74,6 +75,11 @@ export const TransactionForm = (props: Props) => {
 						value={values.transaction_desctiption.toString()}
 						label="支払い内容"
 						note={["何に支払いをしましたか？", "例）食事代、交通費など"]}
+						error={
+							touched.transaction_desctiption && errors.transaction_desctiption
+								? errors.transaction_desctiption
+								: ""
+						}
 					/>
 
 					<Select
@@ -90,7 +96,7 @@ export const TransactionForm = (props: Props) => {
 						error={
 							touched.currency_type && errors.currency_type
 								? errors.currency_type
-								: undefined
+								: ""
 						}
 					/>
 

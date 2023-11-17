@@ -16,7 +16,7 @@ export interface Transaction {
 }
 
 export type TransactionInput = {
-	amount: number;
+	amount: number | null;
 	currency_type: string;
 	transaction_type: number;
 	transaction_desctiption: string;
