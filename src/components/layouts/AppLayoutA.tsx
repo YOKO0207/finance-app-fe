@@ -1,7 +1,7 @@
 import { colors } from "@/styles";
 import globalStyles from "@/styles/globalStyles";
 import { ReactNode } from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text, ScrollView } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Box } from "native-base";
@@ -16,15 +16,14 @@ export const AppLayoutA = (props: Props) => {
 
 	return (
 		<View style={globalStyles.container}>
-			<Box style={styles.logo}>
-				<Ionicons
-					name="airplane"
-					size={24}
-					color={colors.primary[200]}
-				/>
-				<Text style={styles.logoText}>Travel Split</Text>
-			</Box>
-			{children}
+			<ScrollView showsVerticalScrollIndicator={false}>
+				<Box style={styles.logo}>
+					<Ionicons name="airplane" size={24} color={colors.primary[200]} />
+					<Text style={styles.logoText}>Travel Split</Text>
+				</Box>
+				{children}
+				{navigateToNewScreen && <Box style={styles.bottomBox} />}
+			</ScrollView>
 
 			{navigateToNewScreen && (
 				<TouchableOpacity style={styles.fab} onPress={navigateToNewScreen}>
@@ -59,12 +58,15 @@ const styles = StyleSheet.create({
 	logo: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginTop: 10,
-		marginBottom: 24,
+		marginTop: 20,
+		marginBottom: 20,
 		gap: 4,
 	},
 	logoText: {
 		color: colors.primary[200],
 		fontWeight: "bold"
+	},
+	bottomBox: {
+		height:70
 	}
 });
