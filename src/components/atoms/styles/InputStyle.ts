@@ -16,7 +16,7 @@ export const inputStyles = StyleSheet.create({
 		marginBottom: 8,
 	},
 	lable: {
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: "bold",
 		color: colors.gray[900],
 	},

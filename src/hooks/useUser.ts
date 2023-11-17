@@ -18,7 +18,7 @@ export const useUser = () => {
 			if (user) {
 				user.getIdToken().then((idToken) => {
 					console.log(idToken);
-					console.log(idToken);
+					//console.log(idToken);
 				});
 				setUser({
 					displayName: user.displayName || "",

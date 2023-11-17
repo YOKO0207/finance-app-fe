@@ -28,7 +28,7 @@ export const NoteCard = (props: Props) => {
 			onDeletePress();
 			SheetManager.hide("card-action-sheet");
 		}
-	}
+	};
 
 	return (
 		<View style={styles.container}>
@@ -45,17 +45,27 @@ export const NoteCard = (props: Props) => {
 							});
 						}}
 					>
-						<FeatherIcon name="more-vertical" size={24} color={colors.gray[900]}/>
+						<FeatherIcon
+							name="more-vertical"
+							size={24}
+							color={colors.gray[900]}
+						/>
 					</TouchableOpacity>
 				)}
-				
 			</Box>
 			<Box>
 				<Text style={styles.totalTitle}>貸し借り金額</Text>
 				<Box style={styles.contentWrapper}>
-					<Text style={styles.totalText}>{`${
-						note?.currency_type && CURRENCIES[note?.currency_type] || ""
-					}${note?.total || "0"}`}</Text>
+					<Text
+						style={[
+							styles.totalText,
+							note && note.total >= 0
+								? styles.plusTotalText
+								: styles.minusTotalText,
+						]}
+					>{`${(note?.currency_type && CURRENCIES[note?.currency_type]) || ""}${
+						note?.total || "0"
+					}`}</Text>
 					<Box style={styles.userWrapper}>
 						<Box style={styles.userIcon}>
 							<Icon name="user" size={18} color="white" />
@@ -66,7 +76,7 @@ export const NoteCard = (props: Props) => {
 			</Box>
 		</View>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -100,8 +110,13 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		marginBottom: 4,
 	},
-	totalText: {
+	minusTotalText: {
 		color: colors.secondary[500],
+	},
+	plusTotalText: {
+		color: colors.primary[500],
+	},
+	totalText: {
 		fontWeight: "bold",
 		fontSize: 24,
 	},
@@ -127,6 +142,6 @@ const styles = StyleSheet.create({
 		color: colors.gray[900],
 		fontSize: 14,
 		fontWeight: "bold",
-		marginBottom: 4
+		marginBottom: 4,
 	},
 });

@@ -1,8 +1,7 @@
-import { colors } from "@/styles";
-import React from "react";
-import { TextInput, Text, View } from "react-native";
-import { Box } from "native-base";
 import { inputStyles } from "@/components/atoms/styles";
+import { Box } from "native-base";
+import React from "react";
+import { Text, TextInput, View } from "react-native";
 
 interface Props {
 	label: string;

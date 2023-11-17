@@ -1,5 +1,5 @@
-import { Select, TextField } from "@/components/atoms";
-import { CURRENCIES } from "@/constants";
+import { ChipSelect, Select, TextField } from "@/components/atoms";
+import { CURRENCIES, TRANSACTION_TYPES } from "@/constants";
 import { colors } from "@/styles";
 import { TransactionInput } from "@/types";
 import { Formik } from "formik";
@@ -48,6 +48,17 @@ export const TransactionForm = (props: Props) => {
 				touched,
 			}) => (
 				<>
+					<ChipSelect
+						label=""
+						items={TRANSACTION_TYPES}
+						selectedValue={values.transaction_type}
+						onSelect={(value) => setFieldValue("transaction_type", value)}
+						error={
+							touched.transaction_type && errors.transaction_type
+								? errors.transaction_type
+								: ""
+						}
+					/>
 					<TextField
 						onChangeText={handleChange("amount")}
 						onBlur={handleBlur("amount")}
@@ -56,18 +67,6 @@ export const TransactionForm = (props: Props) => {
 						note={["支払いをした金額を入力してください。"]}
 						error={touched.amount && errors.amount ? errors.amount : ""}
 					/>
-
-					<View>
-						<Text>Transaction Type</Text>
-						<TextInput
-							onChangeText={handleChange("transaction_type")}
-							onBlur={handleBlur("transaction_type")}
-							value={values.transaction_type.toString()}
-						/>
-						{touched.transaction_type && errors.transaction_type && (
-							<Text>{errors.transaction_type}</Text>
-						)}
-					</View>
 
 					<TextField
 						onChangeText={handleChange("transaction_desctiption")}

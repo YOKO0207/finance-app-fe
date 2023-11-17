@@ -34,9 +34,16 @@ export const TransactionCard = (props: Props) => {
 				<Text style={styles.dateText}>{transaction.created_at || ""}</Text>
 			</Box>
 			<Box style={styles.totalWrapper}>
-				<Text style={styles.totalText}>{`${
-					CURRENCIES[transaction.currency_type] || ""
-				}${transaction.amount}`}</Text>
+				<Text
+					style={[
+						styles.totalText,
+						transaction && transaction.amount >= 0
+							? styles.plusTotalText
+							: styles.minusTotalText,
+					]}
+				>{`${CURRENCIES[transaction.currency_type] || ""}${
+					transaction.amount
+				}`}</Text>
 				<TouchableOpacity
 					onPress={() => {
 						SheetManager.show("card-action-sheet", {
@@ -81,12 +88,17 @@ const styles = StyleSheet.create({
 		color: colors.gray[200],
 	},
 	totalText: {
-		color: colors.secondary[500],
 		fontSize: 18,
+	},
+	minusTotalText: {
+		color: colors.secondary[500],
+	},
+	plusTotalText: {
+		color: colors.primary[500],
 	},
 	totalWrapper: {
 		flexDirection: "row",
 		alignItems: "center",
-		gap: 4
-	}
+		gap: 4,
+	},
 });
