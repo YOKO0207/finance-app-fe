@@ -14,14 +14,14 @@ export interface Note {
 	currency_type: string;
 }
 
-export type NoteCreateInput = {
+export type NoteInput = {
 	note_title: string;
 	person_name: string;
 	currency_type: string;
 };
 
-export type NoteUpdateInput = {
-	note_title: string;
-	person_name: string;
-	currency_type: string;
-};
+// export type NoteUpdateInput = {
+// 	note_title: string;
+// 	person_name: string;
+// 	currency_type: string;
+// };

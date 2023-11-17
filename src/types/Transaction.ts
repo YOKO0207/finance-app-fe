@@ -15,16 +15,16 @@ export interface Transaction {
 	transaction_desctiption: string;
 }
 
-export type TransactionCreateInput = {
-	amount: number;
-	currency_type: string;
-	transaction_type: number;
-	transaction_desctiption: string;
-}
-
-export type TransactionUpdateInput = {
+export type TransactionInput = {
 	amount: number;
 	currency_type: string;
 	transaction_type: number;
 	transaction_desctiption: string;
 };
+
+// export type TransactionUpdateInput = {
+// 	amount: number;
+// 	currency_type: string;
+// 	transaction_type: number;
+// 	transaction_desctiption: string;
+// };

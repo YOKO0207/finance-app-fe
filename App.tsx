@@ -16,7 +16,7 @@ import { NativeBaseProvider } from "native-base";
 import React, { useEffect } from "react";
 import FlashMessage from "react-native-flash-message";
 import { SheetProvider } from "react-native-actions-sheet";
-//import "./src/components/organisms/actionSheets/sheets";
+import "./src/components/organisms/actionSheets/sheets";
 
 const Stack = createNativeStackNavigator();
 

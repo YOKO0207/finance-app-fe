@@ -13,9 +13,10 @@ const error = {
 const gray = {
 	900: "#323232",
 	500: "#8D8D8D",
-	200: "#B1AFAF",
+	200: "#696969",
 	100: "#EBEBEB",
 	50: "#F0F2F3",
+	40: "#CACACA",
 	10: "#FAFAFA",
 };
 
