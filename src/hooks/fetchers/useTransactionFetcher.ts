@@ -2,8 +2,7 @@ import { fetcherService } from "@/adapters";
 import { BACKEND_API_URLS, SYSTEM_MESSAGES } from "@/constants";
 import {
 	Transaction,
-	TransactionCreateInput,
-	TransactionUpdateInput,
+	TransactionInput,
 	Transactions,
 } from "@/types";
 import { SWRFetcher, generateUrl } from "@/utils";
@@ -11,13 +10,15 @@ import { useState } from "react";
 import { Alert } from "react-native";
 import { showMessage } from "react-native-flash-message";
 import useSWR, { mutate } from "swr";
+import { useNavigation } from "@react-navigation/native";
 
 export const useTransactionCreateFetcher = () => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
+	const navigation = useNavigation();
 
 	const createTransaction = async (args: {
 		apiUrl: string;
-		input: TransactionCreateInput;
+		input: TransactionInput;
 		mutateApiUrls: string[];
 	}) => {
 		const { apiUrl, input, mutateApiUrls } = args;
@@ -30,6 +31,7 @@ export const useTransactionCreateFetcher = () => {
 					message: res?.data?.message || SYSTEM_MESSAGES.SUCCESS,
 					type: "success",
 				});
+				navigation.goBack();
 			} else if (res?.data?.errors) {
 				return res.data.errors;
 			} else {
@@ -59,10 +61,11 @@ export const useTransactionCreateFetcher = () => {
 
 export const useTransactionUpdateFetcher = () => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
+	const navigation = useNavigation();
 
 	const updateTransaction = async (args: {
 		apiUrl: string;
-		input: TransactionUpdateInput;
+		input: TransactionInput;
 		mutateApiUrls: string[];
 	}) => {
 		const { apiUrl, input, mutateApiUrls } = args;
@@ -75,6 +78,7 @@ export const useTransactionUpdateFetcher = () => {
 					message: res?.data?.message || SYSTEM_MESSAGES.SUCCESS,
 					type: "success",
 				});
+				navigation.goBack();
 			} else if (res?.data?.errors) {
 				return res.data.errors;
 			} else {

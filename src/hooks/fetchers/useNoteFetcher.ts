@@ -1,18 +1,21 @@
 import { fetcherService } from "@/adapters";
 import { BACKEND_API_URLS, SYSTEM_MESSAGES } from "@/constants";
-import { Note, NoteCreateInput, NoteUpdateInput, Notes } from "@/types";
+import { Note, NoteInput, Notes } from "@/types";
 import { SWRFetcher, generateUrl } from "@/utils";
 import { useState } from "react";
 import { Alert } from "react-native";
 import { showMessage } from "react-native-flash-message";
 import useSWR, { mutate } from "swr";
+import { useNavigation } from "@react-navigation/native";
 
+// TODO Refactor to separate what will happen after success response
 export const useNoteCreateFetcher = () => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
+	const navigation = useNavigation();
 
 	const createNote = async (args: {
 		apiUrl: string;
-		input: NoteCreateInput;
+		input: NoteInput;
 		mutateApiUrls: string[];
 	}) => {
 		const { apiUrl, input, mutateApiUrls } = args;
@@ -25,6 +28,7 @@ export const useNoteCreateFetcher = () => {
 					message: res?.data?.message || SYSTEM_MESSAGES.SUCCESS,
 					type: "success",
 				});
+				navigation.goBack();
 			} else if (res?.data?.errors) {
 				return res.data.errors;
 			} else {
@@ -54,10 +58,11 @@ export const useNoteCreateFetcher = () => {
 
 export const useNoteUpdateFetcher = () => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
+	const navigation = useNavigation();
 
 	const updateNote = async (args: {
 		apiUrl: string;
-		input: NoteUpdateInput;
+		input: NoteInput;
 		mutateApiUrls: string[];
 	}) => {
 		const { apiUrl, input, mutateApiUrls } = args;
@@ -70,6 +75,7 @@ export const useNoteUpdateFetcher = () => {
 					message: res?.data?.message || SYSTEM_MESSAGES.SUCCESS,
 					type: "success",
 				});
+				navigation.goBack();
 			} else if (res?.data?.errors) {
 				return res.data.errors;
 			} else {
