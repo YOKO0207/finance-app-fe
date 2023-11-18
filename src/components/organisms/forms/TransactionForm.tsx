@@ -1,5 +1,5 @@
 import { ChipSelect, Select, TextField } from "@/components/atoms";
-import { CURRENCIES, TRANSACTION_TYPES } from "@/constants";
+import { CURRENCIES, TRANSACTION_TYPE_ITEMS } from "@/constants";
 import { colors } from "@/styles";
 import { TransactionInput } from "@/types";
 import { Formik } from "formik";
@@ -17,7 +17,7 @@ export const TransactionForm = (props: Props) => {
 	const validationSchema = Yup.object().shape({
 		amount: Yup.number().required("金額は必須です"),
 		currency_type: Yup.string().required("通貨を選択してください"),
-		transaction_type: Yup.number().required("transaction_typeは必須です"),
+		sign: Yup.number().required("種別は必須です"),
 		transaction_desctiption: Yup.string(),
 	});
 
@@ -25,7 +25,7 @@ export const TransactionForm = (props: Props) => {
 		const convertedInput = (input = {
 			amount: Number(input.amount),
 			currency_type: input.currency_type,
-			transaction_type: Number(input.transaction_type),
+			sign: Number(input.sign),
 			transaction_desctiption: input.transaction_desctiption,
 		});
 		const validationErrors = onSubmit(convertedInput);
@@ -50,14 +50,10 @@ export const TransactionForm = (props: Props) => {
 				<>
 					<ChipSelect
 						label=""
-						items={TRANSACTION_TYPES}
-						selectedValue={values.transaction_type}
-						onSelect={(value) => setFieldValue("transaction_type", value)}
-						error={
-							touched.transaction_type && errors.transaction_type
-								? errors.transaction_type
-								: ""
-						}
+						items={TRANSACTION_TYPE_ITEMS}
+						selectedValue={values.sign}
+						onSelect={(value) => setFieldValue("sign", value)}
+						error={touched.sign && errors.sign ? errors.sign : ""}
 					/>
 					<TextField
 						onChangeText={handleChange("amount")}

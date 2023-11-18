@@ -4,6 +4,7 @@ export interface Notes {
 	person_name: string;
 	total: number;
 	currency_type: string;
+	sign: number;
 }
 
 export interface Note {
@@ -12,6 +13,7 @@ export interface Note {
 	person_name: string;
 	total: number;
 	currency_type: string;
+	sign: number;
 }
 
 export type NoteInput = {

@@ -14,7 +14,7 @@ export const TransactionNewScreen = ({ route }: Props) => {
 	const initialValues: TransactionInput = {
 		amount: null,
 		currency_type: "JPY",
-		transaction_type: 1,
+		sign: 1,
 		transaction_desctiption: "",
 	};
 

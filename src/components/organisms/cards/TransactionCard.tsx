@@ -5,6 +5,7 @@ import { Box } from "native-base";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SheetManager } from "react-native-actions-sheet";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { SIGNS } from "@/constants";
 
 interface Props {
 	transaction: Transactions;
@@ -34,16 +35,11 @@ export const TransactionCard = (props: Props) => {
 				<Text style={styles.dateText}>{transaction.created_at || ""}</Text>
 			</Box>
 			<Box style={styles.totalWrapper}>
-				<Text
-					style={[
-						styles.totalText,
-						transaction && transaction.amount >= 0
-							? styles.plusTotalText
-							: styles.minusTotalText,
-					]}
-				>{`${CURRENCIES[transaction.currency_type] || ""}${
-					transaction.amount
-				}`}</Text>
+				<Text style={styles.totalText}>
+					{`${transaction.sign === SIGNS.MINUS ? "-" : ""}${
+						CURRENCIES[transaction.currency_type] || ""
+					}${transaction.amount}`}
+				</Text>
 				<TouchableOpacity
 					onPress={() => {
 						SheetManager.show("card-action-sheet", {
@@ -89,6 +85,8 @@ const styles = StyleSheet.create({
 	},
 	totalText: {
 		fontSize: 18,
+		color: colors.gray[900],
+		fontWeight: "bold",
 	},
 	minusTotalText: {
 		color: colors.secondary[500],

@@ -1,10 +1,15 @@
-export const TRANSACTION_TYPES = [
+export const SIGNS = {
+	PLUS: 1,
+	MINUS: 2,
+};
+
+export const TRANSACTION_TYPE_ITEMS = [
 	{
-		value: 1,
+		value: SIGNS.PLUS,
 		label: "貸す",
 	},
 	{
-		value: 2,
+		value: SIGNS.MINUS,
 		label: "借りる",
 	},
 ];

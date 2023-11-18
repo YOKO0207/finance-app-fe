@@ -5,6 +5,7 @@ const primary = {
 };
 const secondary = {
 	500: "#FB7354",
+	400: "#F49681",
 };
 const error = {
 	200: "#F48E87",

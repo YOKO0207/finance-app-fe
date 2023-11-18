@@ -6,6 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SheetManager } from "react-native-actions-sheet";
 import Icon from "react-native-vector-icons/AntDesign";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { SIGNS } from "@/constants";
 
 interface Props {
 	note: Note | undefined;
@@ -57,15 +58,11 @@ export const NoteCard = (props: Props) => {
 				<Text style={styles.totalTitle}>貸し借り金額</Text>
 				<Box style={styles.contentWrapper}>
 					<Text
-						style={[
-							styles.totalText,
-							note && note.total >= 0
-								? styles.plusTotalText
-								: styles.minusTotalText,
-						]}
-					>{`${(note?.currency_type && CURRENCIES[note?.currency_type]) || ""}${
-						note?.total || "0"
-					}`}</Text>
+						style={
+							styles.totalText}
+					>{`${note?.sign === SIGNS.MINUS ? "-" : ""}${
+						(note?.currency_type && CURRENCIES[note?.currency_type]) || ""
+					}${note?.total || "0"}`}</Text>
 					<Box style={styles.userWrapper}>
 						<Box style={styles.userIcon}>
 							<Icon name="user" size={18} color="white" />
@@ -119,6 +116,7 @@ const styles = StyleSheet.create({
 	totalText: {
 		fontWeight: "bold",
 		fontSize: 24,
+		colors: colors.gray[900],
 	},
 	userName: {
 		fontSize: 14,
@@ -131,7 +129,7 @@ const styles = StyleSheet.create({
 		gap: 4,
 	},
 	userIcon: {
-		backgroundColor: colors.primary[500],
+		backgroundColor: colors.secondary[400],
 		width: 28,
 		height: 28,
 		borderRadius: 8,
