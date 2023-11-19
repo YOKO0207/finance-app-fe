@@ -19,3 +19,4 @@ export const setAuthToken = (token: string | null) => {
 		delete axiosClient.defaults.headers.common["Authorization"];
 	}
 };
+

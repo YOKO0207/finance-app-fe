@@ -17,24 +17,38 @@ import React, { useEffect } from "react";
 import FlashMessage from "react-native-flash-message";
 import { SheetProvider } from "react-native-actions-sheet";
 import "./src/components/organisms/actionSheets/sheets";
+import * as SecureStore from "expo-secure-store";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
 	useEffect(() => {
-		const auth = getAuth(app);
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
+		// Initialize Axios token on app start
+		initAxiosAuthToken();
+
+		// set auth token to axios header when user auth state changes
+		const auth = getAuth();
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (user) {
-				user.getIdToken().then((idToken) => {
-					setAuthToken(idToken);
-				});
+				const token = await user.getIdToken();
+				await SecureStore.setItemAsync("userToken", token);
+				setAuthToken(token);
 			} else {
+				await SecureStore.deleteItemAsync("userToken");
 				setAuthToken(null);
 			}
 		});
 
-		return () => unsubscribe(); // Cleanup subscription on unmount
+		// unsubscribe to the listener when unmounting
+		return () => unsubscribe();
 	}, []);
+
+	// get stored token from secure store and set it to axios header
+	const initAxiosAuthToken = async () => {
+		const storedToken = await SecureStore.getItemAsync("userToken");
+		setAuthToken(storedToken);
+	};
 
 	return (
 		<NativeBaseProvider>
