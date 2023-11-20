@@ -3,7 +3,7 @@ import { NoteCard } from "@/components/organisms";
 import { useNoteDeleteHandler, useNoteIndexSWR } from "@/hooks";
 import { Notes } from "@/types";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 
 type RootStackParamList = {
 	NoteIndexScreen: undefined;

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { User } from "@/types";
 import app from "@/config/firebaseConfig";
+import { useUserContext } from "@/states/contexts";
 
 const initialAuthState = {
 	uid: "",
@@ -10,7 +11,7 @@ const initialAuthState = {
 };
 
 export const useUser = () => {
-	const [user, setUser] = useState<User>(initialAuthState);
+	const { dispatch } = useUserContext();
 
 	useEffect(() => {
 		const auth = getAuth(app);
@@ -18,20 +19,23 @@ export const useUser = () => {
 			if (user) {
 				user.getIdToken().then((idToken) => {
 					console.log(idToken);
-					console.log(idToken);
 				});
-				setUser({
-					displayName: user.displayName || "",
-					uid: user.uid,
-					isLoggedIn: true,
+				dispatch({
+					type: "SET_USER_DATA",
+					payload: {
+						displayName: user.displayName || "",
+						uid: user.uid,
+						isLoggedIn: true,
+					},
 				});
 			} else {
-				setUser(initialAuthState);
+				dispatch({
+					type: "UNSET_USER_DATA",
+				})
 			}
 		});
 
 		return () => unsubscribe();
 	}, []);
 
-	return { user };
 };

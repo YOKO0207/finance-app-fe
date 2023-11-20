@@ -1,20 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { Button, FormControl, Text } from "native-base";
-import { View } from "react-native";
-import { facebookLogin } from "@/services";
-import { useUser } from "@/hooks";
+import { facebookLogout } from "@/services";
+import { colors } from "@/styles";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { AppLayoutA } from "../layouts";
 
 export const SettingScreen = () => {
-	const { user } = useUser();
 	return (
-		<View>
-			{user && <Text>{user.displayName}</Text>}
-			<FormControl width="100%" alignItems={"center"}>
-				<Button backgroundColor="blue.500" width="90%" onPress={facebookLogin}>
-					<Text color="white">Facebook login</Text>
-				</Button>
-			</FormControl>
-			<StatusBar style="auto" />
-		</View>
+		<AppLayoutA>
+				<TouchableOpacity onPress={facebookLogout}>
+					<Text style={styles.menuItem}>
+						ログアウトする
+					</Text>
+				</TouchableOpacity>
+		</AppLayoutA>
 	);
 };
+
+const styles = StyleSheet.create({
+	menuItem: {
+		color: colors.gray[900],
+		borderBottomColor: colors.gray[100],
+		borderBottomWidth: 1,
+		paddingBottom: 16,
+	},
+});

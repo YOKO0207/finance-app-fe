@@ -6,6 +6,7 @@ import {
 	TransactionEditScreen,
 	TransactionIndexScreen,
 	TransactionNewScreen,
+	LoginScreen,
 } from "@/components/screens";
 import app from "@/config/firebaseConfig";
 import { colors } from "@/styles";
@@ -18,6 +19,9 @@ import FlashMessage from "react-native-flash-message";
 import { SheetProvider } from "react-native-actions-sheet";
 import "./src/components/organisms/actionSheets/sheets";
 import * as SecureStore from "expo-secure-store";
+import { ReactElement } from "react";
+import { useUser } from "@/hooks";
+import { UserProvider, useUserContext } from "@/states/contexts";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,58 +55,137 @@ export default function App() {
 	};
 
 	return (
-		<NativeBaseProvider>
-			<SheetProvider>
-			<NavigationContainer>
-				<Stack.Navigator
-					screenOptions={{
-						headerStyle: { backgroundColor: colors.primary[500] },
-						headerTintColor: "#fff",
-						headerTitleStyle: {
-							fontWeight: "bold",
+		<UserProvider>
+			<AppWrapper>
+				<NativeBaseProvider>
+					<SheetProvider>
+						<AppNavigator />
+						{/* <NavigationContainer>
+							<Stack.Navigator
+								screenOptions={{
+									headerStyle: { backgroundColor: colors.primary[500] },
+									headerTintColor: "#fff",
+									headerTitleStyle: {
+										fontWeight: "bold",
+									},
+								}}
+							>
+								<Stack.Screen
+									name="Drawer"
+									component={DrawerNavigator}
+									options={{
+										headerShown: false,
+										headerStyle: {
+											backgroundColor: "blue",
+										},
+									}}
+								/>
+								<Stack.Screen
+									name="NoteNewScreen"
+									component={NoteNewScreen}
+									options={{ title: "トラベル登録" }}
+								/>
+								<Stack.Screen
+									name="NoteEditScreen"
+									component={NoteEditScreen}
+									options={{ title: "ノート編集" }}
+								/>
+								<Stack.Screen
+									name="TransactionIndexScreen"
+									component={TransactionIndexScreen}
+									options={{ title: "取引一覧" }}
+								/>
+								<Stack.Screen
+									name="TransactionNewScreen"
+									component={TransactionNewScreen}
+									options={{ title: "取引登録" }}
+								/>
+								<Stack.Screen
+									name="TransactionEditScreen"
+									component={TransactionEditScreen}
+									options={{ title: "取引編集" }}
+								/>
+							</Stack.Navigator>
+						</NavigationContainer> */}
+
+						<FlashMessage position="bottom" />
+					</SheetProvider>
+				</NativeBaseProvider>
+			</AppWrapper>
+		</UserProvider>
+	);
+}
+
+interface AppWrapperProps {
+	children: ReactElement;
+}
+const AppWrapper = (props: AppWrapperProps) => {
+	const { children } = props;
+
+	useUser();
+
+	return <>{children}</>;
+};
+
+const AppNavigator = () => {
+	const { state: user } = useUserContext();
+	return (
+		<NavigationContainer>
+			<Stack.Navigator
+				screenOptions={{
+					headerStyle: { backgroundColor: colors.primary[500] },
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
+			>
+			{user.isLoggedIn ? (
+			<>
+				<Stack.Screen
+					name="Drawer"
+					component={DrawerNavigator}
+					options={{
+						headerShown: false,
+						headerStyle: {
+							backgroundColor: "blue",
 						},
 					}}
-				>
-					<Stack.Screen
-						name="Drawer"
-						component={DrawerNavigator}
-						options={{
-							headerShown: false,
-							headerStyle: {
-								backgroundColor: "blue",
-							},
-						}}
-					/>
-					<Stack.Screen
-						name="NoteNewScreen"
-						component={NoteNewScreen}
-						options={{ title: "トラベル登録" }}
-					/>
-					<Stack.Screen
-						name="NoteEditScreen"
-						component={NoteEditScreen}
-						options={{ title: "ノート編集" }}
-					/>
-					<Stack.Screen
-						name="TransactionIndexScreen"
-						component={TransactionIndexScreen}
-						options={{ title: "取引一覧" }}
-					/>
-					<Stack.Screen
-						name="TransactionNewScreen"
-						component={TransactionNewScreen}
-						options={{ title: "取引登録" }}
-					/>
-					<Stack.Screen
-						name="TransactionEditScreen"
-						component={TransactionEditScreen}
-						options={{ title: "取引編集" }}
-					/>
+				/>
+				<Stack.Screen
+					name="NoteNewScreen"
+					component={NoteNewScreen}
+					options={{ title: "トラベル登録" }}
+				/>
+				<Stack.Screen
+					name="NoteEditScreen"
+					component={NoteEditScreen}
+					options={{ title: "ノート編集" }}
+				/>
+				<Stack.Screen
+					name="TransactionIndexScreen"
+					component={TransactionIndexScreen}
+					options={{ title: "取引一覧" }}
+				/>
+				<Stack.Screen
+					name="TransactionNewScreen"
+					component={TransactionNewScreen}
+					options={{ title: "取引登録" }}
+				/>
+				<Stack.Screen
+					name="TransactionEditScreen"
+					component={TransactionEditScreen}
+					options={{ title: "取引編集" }}
+				/>
+			</>
+			) : (
+			<Stack.Screen
+					name="LoginScreen"
+					component={LoginScreen}
+					options={{ title: "ログイン", headerShown: false }}
+				/>
+				)}
 				</Stack.Navigator>
-			</NavigationContainer>
-
-			<FlashMessage position="bottom" />
-			</SheetProvider>
-		</NativeBaseProvider>
+		</NavigationContainer>
 	);
 }

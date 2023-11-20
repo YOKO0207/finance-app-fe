@@ -1,4 +1,4 @@
-import { NoteIndexScreen, SettingScreen } from "@/components/screens";
+import { LoginScreen, NoteIndexScreen, SettingScreen } from "@/components/screens";
 import { colors } from "@/styles";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import React from "react";
