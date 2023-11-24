@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "Travel Split",
+    "slug": "travelSplit",
+    "version": "1.0.0",
+    "plugins": [
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "7398108890274411",
+          "clientToken": "a900306d3493f6e302094983b31b96ef",
+          "displayName": "finance-app"
+        }
+      ]
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "SKAdNetworkItems": [
+          {
+            "SKAdNetworkIdentifier": "v9wttpbfk9.skadnetwork"
+          },
+          {
+            "SKAdNetworkIdentifier": "n38lu8286q.skadnetwork"
+          }
+        ]
+      },
+      "bundleIdentifier": "com.anonymous.travelsplit"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.anonymous.travelsplit",
+      "versionCode": 2,
+      "permissions": [
+        "android.permission.INTERNET"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "200ad4f2-b80c-4028-bdfe-227b40c3144b"
+      }
+    }
+  }
+}

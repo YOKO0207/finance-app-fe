@@ -160,7 +160,7 @@ const AppNavigator = () => {
 				<Stack.Screen
 					name="NoteEditScreen"
 					component={NoteEditScreen}
-					options={{ title: "ノート編集" }}
+					options={{ title: "トラベル編集" }}
 				/>
 				<Stack.Screen
 					name="TransactionIndexScreen"

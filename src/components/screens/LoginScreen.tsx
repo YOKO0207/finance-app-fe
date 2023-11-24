@@ -1,16 +1,31 @@
 import { facebookLogin } from "@/services";
-import { Text } from "react-native";
+import { Text, Image, Linking, TouchableOpacity, Alert } from "react-native";
 import { Button, FormControl, Box } from "native-base";
 import { View, StyleSheet } from "react-native";
 import { colors } from "@/styles";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 export const LoginScreen = () => {
+
+	const openURL = async () => {
+		const url = "https://yoko0207.github.io/travel-split-privacy-policy.github.io/";
+		const supported = await Linking.canOpenURL(url);
+
+		if (supported) {
+			await Linking.openURL(url);
+		} else {
+			Alert.alert(`Don't know how to open this URL: ${url}`);
+		}
+	};
+
 	return (
 		<View style={styles.container}>
-			<Box style={styles.logo}>
-				<Ionicons name="airplane" size={48} color={colors.primary[500]} />
-				<Text style={styles.logoText}>Travel Split</Text>
+			<Box style={styles.logoWrapper}>
+				<Image
+					source={require("../../../assets/logo.jpg")}
+					alt="logo"
+					style={styles.logoImage}
+				/>
 			</Box>
 			<FormControl style={styles.formControl}>
 				<Button onPress={facebookLogin} style={styles.facebookLoginButton}>
@@ -21,8 +36,16 @@ export const LoginScreen = () => {
 						</Text>
 					</Box>
 				</Button>
-				
 			</FormControl>
+			<Box style={styles.privacyPolicyWrapper}>
+				<Text style={styles.privacyPolicyText}>
+					ログインすることで
+				</Text>
+				<TouchableOpacity onPress={() => openURL()}>
+					<Text style={styles.privacyPolicyLink}>プライバシーポリシー</Text>
+				</TouchableOpacity>
+				<Text style={styles.privacyPolicyText}>に同意します。</Text>
+			</Box>
 		</View>
 	);
 };
@@ -30,9 +53,7 @@ export const LoginScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		height: "100%",
-		justifyContent: "center",
 		backgroundColor: "white",
-		alignItems: "center",
 	},
 	formControl: {
 		width: "100%",
@@ -40,7 +61,7 @@ const styles = StyleSheet.create({
 	},
 	facebookLoginButton: {
 		backgroundColor: "#4267B2",
-		width: "90%",
+		width: "85%",
 		textAlign: "center",
 	},
 	facebookLoginButtonInnerWrapper: {
@@ -57,13 +78,37 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		marginTop: 20,
-		marginBottom: 100,
+		marginBottom: 50,
 		gap: 4,
 	},
 	logoText: {
 		color: colors.primary[500],
 		fontWeight: "bold",
 		fontSize: 32,
+	},
+	logoWrapper: {
+		width: "100%",
+		alignItems: "center",
+		justifyContent: "center",
+		height: "85%",
+	},
+	logoImage: {
+		marginTop: 60,
+		width: 300,
+		height: 320,
+	},
+	privacyPolicyWrapper: {
+		display: "flex",
+		alignItems: "center",
+		flexDirection: "row",
+		justifyContent: "center",
+		marginTop: 20,
+	},
+	privacyPolicyText: {
+		color: colors.gray[500],
+	},
+	privacyPolicyLink: {
+		color: colors.primary[400]
 	},
 });
 

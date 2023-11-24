@@ -19,7 +19,7 @@ export const DrawerNavigator = () => {
 			<Drawer.Screen
 				name="NoteIndexScreen"
 				component={NoteIndexScreen}
-				options={{ title: "ノート一覧" }}
+				options={{ title: "トラベル一覧" }}
 			/>
 			<Drawer.Screen
 				name="SettingScreen"
