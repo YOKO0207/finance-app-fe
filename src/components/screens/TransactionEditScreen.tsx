@@ -39,6 +39,7 @@ export const TransactionEditScreen = ({ route }: Props) => {
 			<TransactionForm
 				onSubmit={handleFormSubmit}
 				initialValues={initialValues}
+				editScreen={true}
 			/>
 		</AppLayoutA>
 	);

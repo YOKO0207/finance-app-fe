@@ -9,10 +9,11 @@ import * as Yup from "yup";
 interface Props {
 	onSubmit: (input: TransactionInput) => void;
 	initialValues: TransactionInput;
+	editScreen?: boolean;
 }
 
 export const TransactionForm = (props: Props) => {
-	const { onSubmit, initialValues } = props;
+	const { onSubmit, initialValues, editScreen = false } = props;
 
 	const validationSchema = Yup.object().shape({
 		amount: Yup.number().required("金額は必須です"),
@@ -77,23 +78,25 @@ export const TransactionForm = (props: Props) => {
 						}
 					/>
 
-					<Select
-						label="支払いをした通貨"
-						note={["支払いをした通貨を入力してください。"]}
-						selectedValue={values.currency_type}
-						onValueChange={(itemValue) =>
-							setFieldValue("currency_type", itemValue)
-						}
-						items={Object.entries(CURRENCIES).map(([code, currency]) => ({
-							label: `${currency.name} (${currency.symbol})`,
-							value: code,
-						}))}
-						error={
-							touched.currency_type && errors.currency_type
-								? errors.currency_type
-								: ""
-						}
-					/>
+					{!editScreen && (
+						<Select
+							label="支払いをした通貨"
+							note={["支払いをした通貨を入力してください。"]}
+							selectedValue={values.currency_type}
+							onValueChange={(itemValue) =>
+								setFieldValue("currency_type", itemValue)
+							}
+							items={Object.entries(CURRENCIES).map(([code, currency]) => ({
+								label: `${currency.name} (${currency.symbol})`,
+								value: code,
+							}))}
+							error={
+								touched.currency_type && errors.currency_type
+									? errors.currency_type
+									: ""
+							}
+						/>
+					)}
 
 					<Button
 						onPress={() => handleSubmit()}

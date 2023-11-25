@@ -15,7 +15,7 @@ export const NoteEditScreen = ({ route }: Props) => {
 
 	const initialValues: NoteInput = {
 		note_title: note?.data?.data?.note_title || "",
-		person_name: note?.data?.data?.note_title || "",
+		person_name: note?.data?.data?.person_name || "",
 		currency_type: note?.data?.data?.currency_type || "",
 	};
 
