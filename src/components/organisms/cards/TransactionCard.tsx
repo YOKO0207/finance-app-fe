@@ -11,10 +11,12 @@ interface Props {
 	transaction: Transactions;
 	onDeletePress: () => void;
 	onEditPress: () => void;
+	isElementTop: boolean;
+	isElmentBottom: boolean;
 }
 
 export const TransactionCard = (props: Props) => {
-	const { transaction, onDeletePress, onEditPress } = props;
+	const { transaction, onDeletePress, onEditPress, isElementTop, isElmentBottom } = props;
 
 	const onEditPressWrapper = () => {
 		onEditPress();
@@ -27,7 +29,11 @@ export const TransactionCard = (props: Props) => {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={[
+			styles.container,
+			isElementTop ? styles.containerTop : {},
+			isElmentBottom ? styles.containerBottom : {},
+		]}>
 			<Box>
 				<Text style={styles.descriptionText}>
 					{transaction.transaction_desctiption || ""}
@@ -71,7 +77,15 @@ const styles = StyleSheet.create({
 		aluignItems: "center",
 		borderBottomWidth: 1,
 		borderColor: colors.gray[50],
-		...shadows[10],
+		// ...shadows[10],
+	},
+	containerTop: {
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
+	},
+	containerBottom: {
+		borderBottomLeftRadius: 8,
+		borderBottomRightRadius: 8,
 	},
 	descriptionText: {
 		fontSize: 14,

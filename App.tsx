@@ -7,6 +7,7 @@ import {
 	TransactionIndexScreen,
 	TransactionNewScreen,
 	LoginScreen,
+	SettingScreen,
 } from "@/components/screens";
 import app from "@/config/firebaseConfig";
 import { colors } from "@/styles";
@@ -60,54 +61,6 @@ export default function App() {
 				<NativeBaseProvider>
 					<SheetProvider>
 						<AppNavigator />
-						{/* <NavigationContainer>
-							<Stack.Navigator
-								screenOptions={{
-									headerStyle: { backgroundColor: colors.primary[500] },
-									headerTintColor: "#fff",
-									headerTitleStyle: {
-										fontWeight: "bold",
-									},
-								}}
-							>
-								<Stack.Screen
-									name="Drawer"
-									component={DrawerNavigator}
-									options={{
-										headerShown: false,
-										headerStyle: {
-											backgroundColor: "blue",
-										},
-									}}
-								/>
-								<Stack.Screen
-									name="NoteNewScreen"
-									component={NoteNewScreen}
-									options={{ title: "トラベル登録" }}
-								/>
-								<Stack.Screen
-									name="NoteEditScreen"
-									component={NoteEditScreen}
-									options={{ title: "ノート編集" }}
-								/>
-								<Stack.Screen
-									name="TransactionIndexScreen"
-									component={TransactionIndexScreen}
-									options={{ title: "取引一覧" }}
-								/>
-								<Stack.Screen
-									name="TransactionNewScreen"
-									component={TransactionNewScreen}
-									options={{ title: "取引登録" }}
-								/>
-								<Stack.Screen
-									name="TransactionEditScreen"
-									component={TransactionEditScreen}
-									options={{ title: "取引編集" }}
-								/>
-							</Stack.Navigator>
-						</NavigationContainer> */}
-
 						<FlashMessage position="bottom" />
 					</SheetProvider>
 				</NativeBaseProvider>
@@ -147,9 +100,6 @@ const AppNavigator = () => {
 					component={DrawerNavigator}
 					options={{
 						headerShown: false,
-						headerStyle: {
-							backgroundColor: "blue",
-						},
 					}}
 				/>
 				<Stack.Screen

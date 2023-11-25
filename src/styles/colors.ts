@@ -18,7 +18,7 @@ const gray = {
 	100: "#EBEBEB",
 	50: "#F0F2F3",
 	40: "#CACACA",
-	10: "#FAFAFA",
+	10: "#F5F5F5",
 };
 
 export const colors = {

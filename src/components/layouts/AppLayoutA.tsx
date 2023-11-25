@@ -5,6 +5,7 @@ import { StyleSheet, TouchableOpacity, View, Text, ScrollView } from "react-nati
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Box } from "native-base";
+import { StatusBar } from "expo-status-bar";
 
 interface Props {
 	children: ReactNode;
@@ -16,11 +17,12 @@ export const AppLayoutA = (props: Props) => {
 
 	return (
 		<View style={globalStyles.container}>
-			<ScrollView showsVerticalScrollIndicator={false}>
-				<Box style={styles.logo}>
+			<StatusBar style="auto" />
+			<ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+				{/* <Box style={styles.logo}>
 					<Ionicons name="airplane" size={24} color={colors.primary[200]} />
 					<Text style={styles.logoText}>Travel Split</Text>
-				</Box>
+				</Box> */}
 				{children}
 				{navigateToNewScreen && <Box style={styles.bottomBox} />}
 			</ScrollView>
@@ -35,6 +37,9 @@ export const AppLayoutA = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
+	container: {
+		paddingTop: 20,
+	},
 	fab: {
 		position: "absolute",
 		width: 56,
@@ -67,6 +72,6 @@ const styles = StyleSheet.create({
 		fontWeight: "bold"
 	},
 	bottomBox: {
-		height:70
+		height: 100,
 	}
 });

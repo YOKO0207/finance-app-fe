@@ -30,13 +30,14 @@ export const LoginScreen = () => {
 			<FormControl style={styles.formControl}>
 				<Button onPress={facebookLogin} style={styles.facebookLoginButton}>
 					<Box style={styles.facebookLoginButtonInnerWrapper}>
-						<Ionicons name="logo-facebook" size={28} color="white" />
+						<Ionicons name="logo-facebook" size={24} color="white" />
 						<Text style={styles.facebookLoginButtonText}>
 							Facebookでログインする
 						</Text>
 					</Box>
 				</Button>
 			</FormControl>
+			
 			<Box style={styles.privacyPolicyWrapper}>
 				<Text style={styles.privacyPolicyText}>
 					ログインすることで
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
 	container: {
 		height: "100%",
 		backgroundColor: "white",
+		padding: 20,
 	},
 	formControl: {
 		width: "100%",
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
 	},
 	facebookLoginButtonText: {
 		color: "white",
-		fontSize: 16,
+		fontSize: 14,
 	},
 	logo: {
 		flexDirection: "row",
@@ -94,8 +96,8 @@ const styles = StyleSheet.create({
 	},
 	logoImage: {
 		marginTop: 60,
-		width: 300,
-		height: 320,
+		width: 260,
+		height: 280,
 	},
 	privacyPolicyWrapper: {
 		display: "flex",
@@ -105,10 +107,11 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	privacyPolicyText: {
-		color: colors.gray[500],
+		color: colors.gray[900],
+		fontSize: 12,
 	},
 	privacyPolicyLink: {
-		color: colors.primary[400]
+		color: colors.primary[500]
 	},
 });
 

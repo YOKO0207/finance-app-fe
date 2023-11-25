@@ -14,6 +14,7 @@ class FetcherService {
 		}
 	}
 	async SWRGet<T>(url: string): Promise<ReturnResponse<T> | undefined> {
+		console.log(url)
 		try {
 			const response = await axiosClient.get(url);
 			return response;

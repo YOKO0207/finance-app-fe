@@ -8,6 +8,7 @@ import {
 import { Transactions } from "@/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StyleSheet, View } from "react-native";
+import { colors } from "@/styles";
 
 type RootStackParamList = {
 	TransactionIndexScreen: undefined;
@@ -45,9 +46,11 @@ export const TransactionIndexScreen = (props: Props) => {
 				<NoteCard note={note?.data?.data} />
 			</View>
 			<View style={styles.container}>
-				{transactions?.data?.data?.map((item: Transactions) => (
-					<View key={item.id}>
+				{transactions?.data?.data?.map((item: Transactions, index: number) => (
+					<View key={item.id} >
 						<TransactionCard
+						isElementTop={index === 0}
+						isElmentBottom={transactions?.data?.data?.length ? index === transactions?.data?.data?.length - 1 : false}
 							transaction={item}
 							onDeletePress={() =>
 								handleTransactionDelete({ noteId, transactionId: item.id })
@@ -72,5 +75,10 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		borderRadius: 8,
+		borderColor: colors.gray[100],
+		borderWidth: 1,
 	},
+	// transactionWrapper: {
+	// 	borderRadius: 20,
+	// },
 });

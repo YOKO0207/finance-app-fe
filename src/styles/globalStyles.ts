@@ -7,5 +7,8 @@ export default StyleSheet.create({
 		fontFamily: "sans-serif",
 		backgroundColor: colors.gray[10],
 		paddingHorizontal: 20,
+		// backgroundColor: "red",
+		// height: "100%",
+		// marginTop: -10,
 	},
 });
