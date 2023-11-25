@@ -9,7 +9,7 @@ import {
 	LoginScreen,
 	SettingScreen,
 } from "@/components/screens";
-import app from "@/config/firebaseConfig";
+import { auth } from "@/config/firebaseConfig";
 import { colors } from "@/styles";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

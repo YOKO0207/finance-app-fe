@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { User } from "@/types";
-import app from "@/config/firebaseConfig";
+import { app } from "@/config/firebaseConfig";
 import { useUserContext } from "@/states/contexts";
 
 const initialAuthState = {
