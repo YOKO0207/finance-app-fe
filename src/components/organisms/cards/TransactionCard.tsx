@@ -43,7 +43,7 @@ export const TransactionCard = (props: Props) => {
 			<Box style={styles.totalWrapper}>
 				<Text style={styles.totalText}>
 					{`${transaction.sign === SIGNS.MINUS ? "-" : ""}${
-						CURRENCIES[transaction.currency_type] || ""
+						CURRENCIES[transaction.currency_type].symbol || ""
 					}${transaction.amount}`}
 				</Text>
 				<TouchableOpacity

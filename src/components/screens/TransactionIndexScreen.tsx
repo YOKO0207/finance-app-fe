@@ -75,10 +75,5 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		borderRadius: 8,
-		borderColor: colors.gray[100],
-		borderWidth: 1,
 	},
-	// transactionWrapper: {
-	// 	borderRadius: 20,
-	// },
 });

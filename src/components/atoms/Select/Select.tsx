@@ -21,8 +21,8 @@ export const Select = (props: Props) => {
 				<Text style={inputStyles.lable}>{label}</Text>
 				{note && (
 					<Box style={inputStyles.noteWrapper}>
-						{note.map((item: string) => (
-							<Text style={inputStyles.note}>{item}</Text>
+						{note.map((item: string, index: number) => (
+							<Text key={index} style={inputStyles.note}>{item}</Text>
 						))}
 					</Box>
 				)}

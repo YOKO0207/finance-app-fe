@@ -84,8 +84,8 @@ export const TransactionForm = (props: Props) => {
 						onValueChange={(itemValue) =>
 							setFieldValue("currency_type", itemValue)
 						}
-						items={Object.entries(CURRENCIES).map(([code, symbol]) => ({
-							label: `${code} (${symbol})`,
+						items={Object.entries(CURRENCIES).map(([code, currency]) => ({
+							label: `${currency.name} (${currency.symbol})`,
 							value: code,
 						}))}
 						error={

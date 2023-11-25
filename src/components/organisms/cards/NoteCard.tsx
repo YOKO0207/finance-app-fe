@@ -48,7 +48,7 @@ export const NoteCard = (props: Props) => {
 					>
 						<FeatherIcon
 							name="more-vertical"
-							size={24}
+							size={18}
 							color={colors.gray[900]}
 						/>
 					</TouchableOpacity>
@@ -61,11 +61,11 @@ export const NoteCard = (props: Props) => {
 						style={
 							styles.totalText}
 					>{`${note?.sign === SIGNS.MINUS ? "-" : ""}${
-						(note?.currency_type && CURRENCIES[note?.currency_type]) || ""
+						(note?.currency_type && CURRENCIES[note?.currency_type].symbol) || ""
 					}${note?.total || "0"}`}</Text>
 					<Box style={styles.userWrapper}>
 						<Box style={styles.userIcon}>
-							<Icon name="user" size={18} color="white" />
+							<Icon name="user" size={12} color="white" />
 						</Box>
 						<Text style={styles.userText}>{note?.person_name || ""}</Text>
 					</Box>
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		borderBottomWidth: 1,
 		borderBottomColor: colors.gray[50],
-		paddingBottom: 18,
-		marginBottom: 18,
+		paddingBottom: 14,
+		marginBottom: 14,
 	},
 	headerTitle: {
-		fontSize: 18,
+		fontSize: 14,
 		fontWeight: "bold",
 		color: colors.gray[900],
 	},
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 	totalTitle: {
 		color: colors.gray[200],
 		fontWeight: "bold",
-		fontSize: 12,
+		fontSize: 10,
 		marginBottom: 4,
 	},
 	minusTotalText: {
@@ -117,13 +117,8 @@ const styles = StyleSheet.create({
 	},
 	totalText: {
 		fontWeight: "bold",
-		fontSize: 24,
+		fontSize: 20,
 		colors: colors.gray[900],
-	},
-	userName: {
-		fontSize: 14,
-		fontWeight: "bold",
-		color: colors.gray[900],
 	},
 	userWrapper: {
 		flexDirection: "row",
@@ -132,15 +127,15 @@ const styles = StyleSheet.create({
 	},
 	userIcon: {
 		backgroundColor: colors.secondary[400],
-		width: 28,
-		height: 28,
-		borderRadius: 8,
+		width: 20,
+		height: 20,
+		borderRadius: 4,
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	userText: {
-		color: colors.gray[900],
-		fontSize: 14,
+		color: colors.gray[200],
+		fontSize: 10,
 		fontWeight: "bold",
 		marginBottom: 4,
 	},
