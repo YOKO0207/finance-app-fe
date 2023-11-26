@@ -9,10 +9,11 @@ import * as Yup from "yup";
 interface Props {
 	onSubmit: (input: NoteInput) => void;
 	initialValues: NoteInput;
+	buttonText: string;
 }
 
 export const NoteForm = (props: Props) => {
-	const { onSubmit, initialValues } = props;
+	const { onSubmit, initialValues, buttonText } = props;
 
 	const validationSchema = Yup.object().shape({
 		note_title: Yup.string().required("タイトルは必須です"),
@@ -70,9 +71,9 @@ export const NoteForm = (props: Props) => {
 					<Select
 						label="最終的に清算をする通貨"
 						note={[
-							"割り勘をするお金と清算をするお金を分けるために使用します。",
-							"例えば現地通過で割り勘をし、日本円で清算する時などです。",
-							"設定はいつでも変更可能です。",
+							"異なる通貨での支払いと清算を区別するために使います。",
+							"例えば、旅行先の通貨で割り勘をし、後で日本円で清算する場合などです。",
+							"この設定はいつでも変更可能で、柔軟に対応できます。",
 						]}
 						selectedValue={values.currency_type}
 						onValueChange={(itemValue) =>
@@ -91,7 +92,7 @@ export const NoteForm = (props: Props) => {
 
 					<Button
 						onPress={() => handleSubmit()}
-						title="作成"
+						title={buttonText}
 						color={colors.primary[500]}
 					/>
 				</>

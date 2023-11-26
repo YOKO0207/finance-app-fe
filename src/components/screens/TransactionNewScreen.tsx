@@ -31,6 +31,7 @@ export const TransactionNewScreen = ({ route }: Props) => {
 			<TransactionForm
 				onSubmit={handleFormSubmit}
 				initialValues={initialValues}
+				buttonText="登録する"
 			/>
 		</AppLayoutA>
 	);

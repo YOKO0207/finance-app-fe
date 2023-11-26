@@ -45,6 +45,7 @@ export const NoteCard = (props: Props) => {
 								},
 							});
 						}}
+						style={styles.actionButton}
 					>
 						<FeatherIcon
 							name="more-vertical"
@@ -79,7 +80,8 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "white",
 		paddingHorizontal: 18,
-		paddingVertical: 20,
+		paddingTop: 4,
+		paddingBottom: 20,
 		borderRadius: 8,
 		borderColor: colors.gray[100],
 		borderWidth: 1,
@@ -91,8 +93,10 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		borderBottomWidth: 1,
 		borderBottomColor: colors.gray[50],
-		paddingBottom: 14,
+		// paddingBottom: 6,
+		// paddingBottom: 20,
 		marginBottom: 14,
+		height: 48
 	},
 	headerTitle: {
 		fontSize: 14,
@@ -138,5 +142,9 @@ const styles = StyleSheet.create({
 		fontSize: 10,
 		fontWeight: "bold",
 		marginBottom: 4,
+	},
+	actionButton: {
+		padding: 8,
+		// backgroundColor: "red",
 	},
 });

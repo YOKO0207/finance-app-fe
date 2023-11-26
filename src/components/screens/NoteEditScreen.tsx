@@ -25,7 +25,7 @@ export const NoteEditScreen = ({ route }: Props) => {
 
 	return (
 		<AppLayoutA>
-			<NoteForm onSubmit={handleFormSubmit} initialValues={initialValues} />
+			<NoteForm onSubmit={handleFormSubmit} initialValues={initialValues} buttonText="更新する" />
 		</AppLayoutA>
 	);
 };

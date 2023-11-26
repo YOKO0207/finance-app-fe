@@ -10,10 +10,11 @@ interface Props {
 	onSubmit: (input: TransactionInput) => void;
 	initialValues: TransactionInput;
 	editScreen?: boolean;
+	buttonText: string;
 }
 
 export const TransactionForm = (props: Props) => {
-	const { onSubmit, initialValues, editScreen = false } = props;
+	const { onSubmit, initialValues, editScreen = false, buttonText } = props;
 
 	const validationSchema = Yup.object().shape({
 		amount: Yup.number().required("金額は必須です"),
@@ -100,7 +101,7 @@ export const TransactionForm = (props: Props) => {
 
 					<Button
 						onPress={() => handleSubmit()}
-						title="作成"
+						title={buttonText}
 						color={colors.primary[500]}
 					/>
 				</>

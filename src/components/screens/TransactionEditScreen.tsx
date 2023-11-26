@@ -40,6 +40,7 @@ export const TransactionEditScreen = ({ route }: Props) => {
 				onSubmit={handleFormSubmit}
 				initialValues={initialValues}
 				editScreen={true}
+				buttonText="更新する"
 			/>
 		</AppLayoutA>
 	);

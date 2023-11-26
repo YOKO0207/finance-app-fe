@@ -47,6 +47,7 @@ export const TransactionCard = (props: Props) => {
 					}${transaction.amount}`}
 				</Text>
 				<TouchableOpacity
+				style={styles.actionButton}
 					onPress={() => {
 						SheetManager.show("card-action-sheet", {
 							payload: {
@@ -113,4 +114,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		gap: 4,
 	},
+	actionButton: {
+		// backgroundColor: "red",
+		padding: 8,
+	}
 });

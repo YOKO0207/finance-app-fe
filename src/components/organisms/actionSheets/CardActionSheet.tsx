@@ -64,7 +64,7 @@ export const CardActionSheet = (props: SheetProps<Props>) => {
 const styles = StyleSheet.create({
 	container: {
 		// gap: 32,
-		paddingVertical: 32,
+		paddingVertical: 24,
 	},
 	actionButton: {
 		flexDirection: "row",

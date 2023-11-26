@@ -54,7 +54,7 @@ export const NoteIndexScreen = (props: Props) => {
 
 const styles = StyleSheet.create({
 	container: {
-		gap: 20,
+		gap: 12,
 		display: "flex",
 	},
 });

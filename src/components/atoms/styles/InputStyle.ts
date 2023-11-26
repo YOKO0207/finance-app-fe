@@ -26,6 +26,7 @@ export const inputStyles = StyleSheet.create({
 	note: {
 		color: colors.gray[200],
 		fontSize: 13,
+		lineHeight: 20,
 	},
 	error: {
 		color: "red",
