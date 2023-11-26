@@ -1,4 +1,5 @@
 const primary = {
+	600: "#00A1E7",
 	500: "#57C5F5",
 	400: "#57C5F5",
 	200: "#AEE5FC",
@@ -8,8 +9,8 @@ const secondary = {
 	400: "#F49681",
 };
 const error = {
-	200: "#F48E87",
-	100: "#F6A6A1"
+	500: "#FF0000",
+	100: "#F6A6A1",
 };
 const gray = {
 	900: "#323232",
@@ -18,6 +19,7 @@ const gray = {
 	100: "#EBEBEB",
 	50: "#E8EAEB",
 	40: "#CACACA",
+	20: "#EBEBEB",
 	10: "#F5F5F5",
 };
 

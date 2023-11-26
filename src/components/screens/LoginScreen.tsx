@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
 	container: {
 		height: "100%",
 		backgroundColor: "white",
-		padding: 20,
+		paddingHorizontal: 20,
+		paddingVertical: 60,
 	},
 	formControl: {
 		width: "100%",
@@ -96,8 +97,8 @@ const styles = StyleSheet.create({
 	},
 	logoImage: {
 		marginTop: 60,
-		width: 260,
-		height: 280,
+		width: 220,
+		height: 240,
 	},
 	privacyPolicyWrapper: {
 		display: "flex",
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 	},
 	privacyPolicyLink: {
-		color: colors.primary[500]
+		color: colors.primary[600]
 	},
 });
 

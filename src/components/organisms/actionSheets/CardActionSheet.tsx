@@ -20,19 +20,19 @@ export const CardActionSheet = (props: SheetProps<Props>) => {
 		<ActionSheet id={props.sheetId}>
 			<View style={styles.container}>
 				<TouchableOpacity
-					style={styles.actionButton}
+					style={[styles.actionButton, styles.editButton]}
 					onPress={payload?.onEditPress}
 				>
-					<Box style={styles.iconWrapper}>
-						<Icon name="edit-2" size={18} />
-					</Box>
+					{/* <Box style={styles.iconWrapper}>
+						<Icon name="edit-2" size={14} />
+					</Box> */}
 					<Text style={styles.actionText}>編集する</Text>
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => setDialogVisible(true)}>
 					<Box style={styles.actionButton}>
 						<Box style={{ ...styles.iconWrapper, ...styles.deleteIconWrapper }}>
-							<Icon name="delete" size={16} color="white" />
+							<Icon name="delete" size={12} color="white" />
 						</Box>
 						<Text style={{ ...styles.actionText, ...styles.deleteText }}>
 							削除する
@@ -63,32 +63,41 @@ export const CardActionSheet = (props: SheetProps<Props>) => {
 
 const styles = StyleSheet.create({
 	container: {
-		gap: 32,
+		// gap: 32,
 		paddingVertical: 32,
-		paddingHorizontal: 16,
 	},
 	actionButton: {
 		flexDirection: "row",
 		alignItems: "center",
+		paddingHorizontal: 16,
+		justifyContent: "center",
+	},
+	editButton: {
+		borderBottomColor: colors.gray[20],
+		borderBottomWidth: 1,
+		paddingBottom: 24,
+		marginBottom: 24,
 	},
 	actionText: {
-		fontSize: 16,
+		fontSize: 14,
 		marginLeft: 8,
 		color: colors.gray[900],
 	},
 	deleteText: {
-		color: colors.secondary[500],
+		color: colors.error[500],
+		marginBottom: 4
+		// fontWeight: "bold",
 	},
 	iconWrapper: {
 		alignItems: "center",
 		justifyContent: "center",
-		width: 34,
-		height: 34,
+		width: 24,
+		height: 24,
 		borderRadius: 40,
 		backgroundColor: colors.gray[100],
 	},
 	deleteIconWrapper: {
 		paddingRight: 2,
-		backgroundColor: colors.error[100],
+		backgroundColor: colors.error[500],
 	},
 });
